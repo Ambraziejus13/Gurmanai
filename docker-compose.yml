@@ -4,23 +4,20 @@ services:
   db:
     image: "mysql"
     environment:
-        MYSQL_ROOT_PASSWORD: ""
+        MYSQL_ROOT_PASSWORD: 12345
         MYSQL_DATABASE: gurmanudb
-        MYSQL_USER: stud
-        MYSQL_PASSWORD: stud
     volumes:
         - db-data:/var/lib/mysql
 
   myapp:
     image: docker.io/bitnami/laravel:10
-    command: ["php artisan:migrate --seed"]
     ports:
       - '8000:8000'
     environment:
       - DB_HOST=db
       - DB_PORT=3306
-      - DB_USERNAME=stud
-      - DB_PASSWORD=stud
+      - DB_USERNAME=root
+      - DB_PASSWORD=12345
       - DB_DATABASE=gurmanudb
     volumes:
     - './:/app'
