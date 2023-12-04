@@ -20,7 +20,7 @@ class Recipe extends Model
     ];
 
     public function scopeFilter($query, array $filters) {
-        $query->when(($filters['search'] ?? false) && $filters['search'] != "", function ($query, $search) {
+        $query->when($filters['search'] ?? false, function ($query, $search) {
             $query->where(function ($query) use ($search) {
                 $query->where('title', 'like', '%' . $search . '%')
                     ->orWhere('ingredients', 'like', '%' . $search . '%')
